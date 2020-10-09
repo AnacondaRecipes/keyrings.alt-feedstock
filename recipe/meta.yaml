@@ -19,11 +19,11 @@ requirements:
   host:
     - python
     - pip
+    - toml
     - setuptools
     - setuptools_scm >=1.15.0
   run:
     - keyring
-    - toml
     - six
     - python
 
