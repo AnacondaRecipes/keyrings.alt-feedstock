@@ -1,6 +1,6 @@
 {% set name = "keyrings.alt" %}
-{% set version = "3.4.0" %}
-{% set sha256 = "91328ac4229e70b1d0061d21bf61d36b031a6b4828f2682e38c741812f6eb23d" %}
+{% set version = "4.0.0" %}
+{% set sha256 = "f70ef01a8f2b968b83643db370a1e85bc0e4bc8b358f9661504279afb019d21d" %}
 
 package:
   name: {{ name|lower }}
