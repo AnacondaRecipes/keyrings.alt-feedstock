@@ -30,6 +30,10 @@ requirements:
 test:
   imports:
     - keyrings.alt
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
   home: https://github.com/jaraco/keyrings.alt
