@@ -1,32 +1,29 @@
 {% set name = "keyrings.alt" %}
-{% set version = "4.1.0" %}
-{% set sha256 = "52ccb61d6f16c10f32f30d38cceef7811ed48e086d73e3bae86f0854352c4ab2" %}
+{% set version = "5.0.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/keyrings.alt-{{ version }}.tar.gz
+  sha256: 9d446cb47bbcea90ffa2ecc3e8003acf41573fc201bf44b4bf13bd0e11484828
+
 
 build:
   number: 0
-  skip: True  # [py<36]
-  script: python setup.py install --single-version-externally-managed --record record.txt
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   host:
     - python
     - pip
-    - toml
-    - setuptools >=42
-    - setuptools_scm >=3.4.1
+    - setuptools >=56
+    - setuptools-scm >=3.4.1
     - wheel
   run:
-    - keyring
     - python
+    - jaraco.classes
 
 test:
   imports:
@@ -41,10 +38,9 @@ about:
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: 'Alternate keyring backend implementations for use with the keyring package.'
-
-  doc_url: http://pythonhosted.org/keyrings.alt/
-  dev_url: https://github.com/jaraco/keyrings.alt/
+  summary: Alternate keyring backend implementations for use with the keyring package.
+  doc_url: https://github.com/jaraco/keyrings.alt
+  dev_url: https://github.com/jaraco/keyrings.alt
 
 extra:
   recipe-maintainers:
