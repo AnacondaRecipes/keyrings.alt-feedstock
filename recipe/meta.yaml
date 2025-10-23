@@ -1,37 +1,43 @@
 {% set name = "keyrings.alt" %}
-{% set version = "5.0.0" %}
+{% set version = "5.0.2" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/keyrings.alt-{{ version }}.tar.gz
-  sha256: 9d446cb47bbcea90ffa2ecc3e8003acf41573fc201bf44b4bf13bd0e11484828
-
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name|replace(".", "_") }}-{{ version }}.tar.gz
+  sha256: 8f097ebe9dc8b185106502b8cdb066c926d2180e13b4689fd4771a3eab7d69fb
 
 build:
   number: 0
+  skip: true  # [py<38]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   host:
-    - python
     - pip
-    - setuptools >=56
+    - python
+    - setuptools >=61.2
     - setuptools-scm >=3.4.1
-    - wheel
+    - toml
   run:
     - python
     - jaraco.classes
+    - jaraco.context
 
 test:
+  source_files:
+    - tests
   imports:
     - keyrings.alt
   requires:
     - pip
+    - pytest >=6,!= 8.1.*
+    - keyring >=20
   commands:
     - pip check
+    - pytest -v tests
 
 about:
   home: https://github.com/jaraco/keyrings.alt
